@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    style="@style/main_linear_view"
     android:paddingHorizontal="@dimen/common_padding"
     android:orientation="vertical">
 
@@ -25,57 +25,21 @@
 
         <Button
             android:id="@+id/button_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:insetTop="@dimen/common_padding"
+            style="@style/main_button"
             android:text="@string/search"
-            android:textAllCaps="false"
-            android:textColor="@color/black_text"
-            android:textSize="@dimen/main_text_size"
-            app:cornerRadius="@dimen/corner_radius"
-            app:icon="@drawable/search"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/icon_padding"
-            app:iconTint="@color/black_text" />
+            app:icon="@drawable/search" />
 
         <Button
             android:id="@+id/button_media"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:insetTop="@dimen/common_padding"
+            style="@style/main_button"
             android:text="@string/media"
-            android:textAllCaps="false"
-            android:textColor="@color/black_text"
-            android:textSize="@dimen/main_text_size"
-            app:cornerRadius="@dimen/corner_radius"
-            app:icon="@drawable/media"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/icon_padding"
-            app:iconTint="@color/black_text"/>
+            app:icon="@drawable/media" />
 
         <Button
             android:id="@+id/button_settings"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:insetTop="@dimen/common_padding"
+            style="@style/main_button"
             android:text="@string/settings"
-            android:textAllCaps="false"
-            android:textColor="@color/black_text"
-            android:textSize="@dimen/main_text_size"
-            app:cornerRadius="@dimen/corner_radius"
-            app:icon="@drawable/settings"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/icon_padding"
-            app:iconTint="@color/black_text" />
+            app:icon="@drawable/settings" />
 
     </LinearLayout>
 

@@ -11,4 +11,11 @@
     <string name="arrow_back">arrow_back</string>
     <string name="search_screen">Вы попали на экран поиска :)</string>
     <string name="media_screen">Вы попали на экран медиатеки :)</string>
+    <string name="settings_message">Привет, Android разработка — это круто!</string>
+    <string name="settings_title">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
+    <string name="settings_email">evg.ermolov@ya.ru</string>
+    <string name="settings_url">https://practicum.yandex.ru/android-developer/</string>
+    <string name="track_title">Название трека</string>
+    <string name="track_artist">Исполнитель</string>
+    <string name="track_time">13:37</string>
 </resources>
