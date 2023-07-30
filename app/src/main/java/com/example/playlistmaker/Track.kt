@@ -1,4 +1,4 @@
-package com.example.playlistmaker.domain.models
+package com.example.playlistmaker
 
 import java.util.Date
 
@@ -11,6 +11,5 @@ data class Track(
     var collectionName: String,
     var releaseDate: Date,
     var primaryGenreName: String,
-    var country: String,
-    var previewUrl: String
+    var country: String
 )

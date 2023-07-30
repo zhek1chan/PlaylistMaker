@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.activities.PlayerActivity">
+    tools:context=".player.PlayerActivity">
 
     <ImageView
         android:id="@+id/back_button_player_activity"
@@ -70,28 +70,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="255dp"
         android:src="@drawable/add_icon" />
-    <RelativeLayout
+
+    <ImageView
+        android:id="@+id/play_button_player_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="238dp">
-
-        <ImageView
-            android:id="@+id/play_button_player_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/play"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/pause_button_player_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pause"
-            android:visibility="gone" />
-    </RelativeLayout>
+        android:layout_marginBottom="238dp"
+        android:src="@drawable/play" />
 
     <ImageView
         android:id="@+id/like_button_player_activity"
@@ -111,7 +99,7 @@
         app:layout_constraintTop_toBottomOf="@id/band_name_player_activity"
         android:layout_marginTop="134dp"
         style="@style/primary_text"
-        android:text="@string/timing" />
+        android:text="1:45" />
 
     <TextView
         android:id="@+id/duration_track_player_activity"

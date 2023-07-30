@@ -1,4 +1,4 @@
-package com.example.playlistmaker.presentation.ui.viewHolders
+package com.example.playlistmaker
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.playlistmaker.presentation.ui.DateUtils
-import com.example.playlistmaker.R
-import com.example.playlistmaker.domain.models.Track
 
 class TrackViewHolder(parent: ViewGroup) :
     RecyclerView.ViewHolder(
@@ -22,13 +19,12 @@ class TrackViewHolder(parent: ViewGroup) :
     private val trackTime: TextView = itemView.findViewById(R.id.track_time)
     private var trackID: String = ""
     private var country: String = ""
-    private var url: String = ""
+
     fun bind(item: Track) {
         trackName.text = item.trackName
         bandName.text = item.artistName
         trackID = item.trackId
         country = item.country
-        url = item.previewUrl
         val cornerPixelSize =
             itemView.resources.getDimensionPixelSize(R.dimen.album_cover_corner_radius)
         trackTime.text = DateUtils.formatTime(item.trackTimeMillis)
