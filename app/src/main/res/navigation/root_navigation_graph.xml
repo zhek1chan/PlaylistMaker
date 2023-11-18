@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_navigation_graph"
     app:startDestination="@id/mediaFragment">
 
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.playlistmaker.search.ui.fragment.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment">
+        <action
+            android:id="@+id/Fragment_to_playerFragment"
+            app:destination="@id/playerActivity"></action>
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.playlistmaker.settings.ui.fragment.SettingsFragment"
@@ -15,5 +20,18 @@
     <fragment
         android:id="@+id/mediaFragment"
         android:name="com.example.playlistmaker.media.ui.fragments.MediaFragment"
-        android:label="MediaFragment" />
+        android:label="MediaFragment">
+        <action
+            android:id="@+id/Fragment_fav_to_playerFragment"
+            app:destination="@id/playerActivity"></action>
+    </fragment>
+    <fragment
+        android:id="@+id/createPlaylistFragment"
+        android:name="com.example.playlistmaker.media.ui.fragments.CreatingPlaylistFragment"
+        android:label="CreatingPlaylistFragment" />
+    <fragment
+        android:id="@+id/playerActivity"
+        android:name="com.example.playlistmaker.player.ui.activity.PlayerFragment"
+        android:label="fragment_player"
+        tools:layout="@layout/fragment_player" />
 </navigation>

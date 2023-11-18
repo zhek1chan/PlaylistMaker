@@ -2,7 +2,6 @@ package com.example.playlistmaker.search.ui.fragment
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,12 +13,13 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.FragmentSearchBinding
 import com.example.playlistmaker.player.domain.Track
 import com.example.playlistmaker.player.ui.TrackAdapter
-import com.example.playlistmaker.player.ui.activity.PlayerActivity
 import com.example.playlistmaker.search.ui.SearchScreenState
 import com.example.playlistmaker.search.ui.view_model.SearchViewModel
 import kotlinx.coroutines.GlobalScope
@@ -136,9 +136,10 @@ class SearchFragment : Fragment() {
         Log.d("SearchFragment", "Click on the track")
         isClickAllowed = false
         searchViewModel.addItem(item)
-        val intent = Intent(requireContext(), PlayerActivity::class.java)
-        intent.putExtra(key, item)
-        this.startActivity(intent)
+        val bundle = Bundle()
+        bundle.putParcelable("track", item)
+        val navController = findNavController()
+        navController.navigate(R.id.Fragment_to_playerFragment, bundle)
     }
 
     private fun clearButtonVisibility(s: CharSequence?): Int {

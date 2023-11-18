@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="numberOfSongsAvailable">
+        <item quantity="one">трек</item>
+        <item quantity="few">трека</item>
+        <item quantity="zero">треков</item>
+        <item quantity="other">треков</item>
+        <item quantity="many">треков</item>
+    </plurals>
+</resources>

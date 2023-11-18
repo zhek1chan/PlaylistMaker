@@ -1,25 +1,10 @@
 package com.example.playlistmaker.media.data.converters
 
-import com.example.playlistmaker.media.data.entity.TrackEntity
+import com.example.playlistmaker.media.data.entity.TrackInsidePlaylistEntity
 import com.example.playlistmaker.player.domain.Track
 
-class TrackDbConvertor {
-    fun map(track: Track): TrackEntity {
-        return TrackEntity(
-            track.trackId,
-            track.artworkUrl100,
-            track.trackName,
-            track.artistName,
-            track.collectionName,
-            track.releaseDate,
-            track.primaryGenreName,
-            track.country,
-            track.trackTimeMillis,
-            track.previewUrl
-        )
-    }
-
-    fun map(track: TrackEntity): Track {
+class TrackInPlaylistConvertor {
+    fun map(track: TrackInsidePlaylistEntity): Track {
         return Track(
             track.trackName,
             track.artistName,
@@ -30,7 +15,23 @@ class TrackDbConvertor {
             track.releaseDate,
             track.primaryGenreName,
             track.country,
-            track.previewUrl
+            track.previewUrl,
+            track.isFavourite
+        )
+    }
+    fun map(track: Track): TrackInsidePlaylistEntity {
+        return TrackInsidePlaylistEntity(
+            track.trackId,
+            track.artistName,
+            track.trackTimeMillis,
+            track.artworkUrl100,
+            track.trackName,
+            track.collectionName,
+            track.releaseDate,
+            track.primaryGenreName,
+            track.country,
+            track.previewUrl,
+            track.isFavourite
         )
     }
 }
