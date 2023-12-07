@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Track(
     val trackName: String,
     val artistName: String,
-    val trackTimeMillis: String,
+    var trackTimeMillis: String,
     val artworkUrl100: String,
     var trackId: Long,
     var collectionName: String,

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "91872729c1d76e36b07832248ca117db",
+    "identityHash": "d8cc936f50866552dc5819c318e2b932",
     "entities": [
       {
         "tableName": "tracks_table",
@@ -180,20 +180,8 @@
       },
       {
         "tableName": "track_in_playlist_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`trackId` INTEGER NOT NULL, `artworkUrl100` TEXT NOT NULL, `trackName` TEXT NOT NULL, `artistName` TEXT NOT NULL, `collectionName` TEXT NOT NULL, `releaseDate` TEXT NOT NULL, `primaryGenreName` TEXT NOT NULL, `country` TEXT NOT NULL, `trackTimeMillis` TEXT NOT NULL, `previewUrl` TEXT NOT NULL, `isFavourite` INTEGER NOT NULL, PRIMARY KEY(`trackId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`trackName` TEXT NOT NULL, `artistName` TEXT NOT NULL, `trackTimeMillis` TEXT NOT NULL, `artworkUrl100` TEXT NOT NULL, `trackId` INTEGER NOT NULL, `collectionName` TEXT NOT NULL, `releaseDate` TEXT NOT NULL, `primaryGenreName` TEXT NOT NULL, `country` TEXT NOT NULL, `previewUrl` TEXT NOT NULL, `isFavourite` INTEGER NOT NULL, PRIMARY KEY(`trackId`))",
         "fields": [
-          {
-            "fieldPath": "trackId",
-            "columnName": "trackId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "artworkUrl100",
-            "columnName": "artworkUrl100",
-            "affinity": "TEXT",
-            "notNull": true
-          },
           {
             "fieldPath": "trackName",
             "columnName": "trackName",
@@ -204,6 +192,24 @@
             "fieldPath": "artistName",
             "columnName": "artistName",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "trackTimeMillis",
+            "columnName": "trackTimeMillis",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "artworkUrl100",
+            "columnName": "artworkUrl100",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "trackId",
+            "columnName": "trackId",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -231,12 +237,6 @@
             "notNull": true
           },
           {
-            "fieldPath": "trackTimeMillis",
-            "columnName": "trackTimeMillis",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
             "fieldPath": "previewUrl",
             "columnName": "previewUrl",
             "affinity": "TEXT",
@@ -257,12 +257,51 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "restored_tracks_in_playlist",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`playlistId` INTEGER NOT NULL, `trackId` INTEGER NOT NULL, PRIMARY KEY(`playlistId`, `trackId`), FOREIGN KEY(`trackId`) REFERENCES `track_in_playlist_table`(`trackId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "playlistId",
+            "columnName": "playlistId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "trackId",
+            "columnName": "trackId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "playlistId",
+            "trackId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "track_in_playlist_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "trackId"
+            ],
+            "referencedColumns": [
+              "trackId"
+            ]
+          }
+        ]
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '91872729c1d76e36b07832248ca117db')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd8cc936f50866552dc5819c318e2b932')"
     ]
   }
 }

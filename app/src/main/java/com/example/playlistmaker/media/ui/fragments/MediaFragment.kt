@@ -39,6 +39,7 @@ class MediaFragment : Fragment(), PageSelector {
             }
         }
         tabMediator.attach()
+
         binding.tabLayout.addOnTabSelectedListener(
             object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {

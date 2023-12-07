@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".player.ui.activity.PlayerFragment">
+    tools:context=".player.ui.fragment.PlayerFragment">
 
     <RelativeLayout
         android:id="@+id/background"

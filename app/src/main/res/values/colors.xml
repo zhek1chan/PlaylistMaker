@@ -14,5 +14,6 @@
     <color name="black_text_settings">#000000</color>
     <color name="yp_blue">#3772E7</color>
     <color name="yp_blue_light">#9FBBF3</color>
+    <color name="yp_light_grey">#E6E8EB</color>
 
 </resources>

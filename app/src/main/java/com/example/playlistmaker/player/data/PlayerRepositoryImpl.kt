@@ -13,10 +13,14 @@ class PlayerRepositoryImpl(private val mediaPlayer: MediaPlayer) : PlayerReposit
     private var playerState = PlayerState.STATE_DEFAULT
     private var playerJob: Job? = null
     override fun preparePlayer(url: String, completion: () -> Unit) {
+
         playerJob?.start()
         if (playerState != PlayerState.STATE_DEFAULT) return
         mediaPlayer.reset()
         mediaPlayer.setDataSource(url)
+        mediaPlayer.setOnPreparedListener {
+            mediaPlayer.start()
+        }
         mediaPlayer.prepareAsync()
         mediaPlayer.setOnPreparedListener {
             playerState = PlayerState.STATE_PREPARED
@@ -25,10 +29,13 @@ class PlayerRepositoryImpl(private val mediaPlayer: MediaPlayer) : PlayerReposit
         mediaPlayer.setOnCompletionListener {
             playerState = PlayerState.STATE_PREPARED
         }
+
     }
 
     override fun play() {
-        mediaPlayer.start()
+        if ((playerState == PlayerState.STATE_PAUSED) || (playerState == PlayerState.STATE_PREPARED)) {
+            mediaPlayer.start()
+        }
         playerState = PlayerState.STATE_PLAYING
     }
 

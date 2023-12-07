@@ -14,7 +14,7 @@ import com.example.playlistmaker.media.data.entity.TrackInsidePlaylistEntity
 import com.example.playlistmaker.media.data.entity.TracksInPlaylistEntity
 import com.example.playlistmaker.media.domain.db.Playlist
 import com.example.playlistmaker.media.domain.db.PlaylistsRepository
-import com.example.playlistmaker.media.ui.fragments.CreatingPlaylistFragment
+import com.example.playlistmaker.media.ui.fragments.playlists.CreatingPlaylistFragment
 import com.example.playlistmaker.player.domain.Track
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -32,13 +32,29 @@ class PlaylistsRepositoryImpl(
         emit(convertFromPlaylistEntity(playlists.reversed()))
     }
 
-    override fun putPlaylist(playlist: Playlist) {
+    override fun putPlaylist(playlist: Playlist, tracks: List<Track>) {
+        //Восстанавливаем таблицу треков
+        Log.d("getting tracks", "$tracks")
+        for (track in tracks) {
+            if (track.trackId != 0.toLong()) {
+                insertTrack(track)
+                db.playlistDao().insertRestoredTrack(playlist.playlistId, track.trackId)
+            }
+        }
         var converted: PlaylistEntity = convertor.map(playlist)
+        Log.d("changed playlist", "successfully")
         db.playlistDao().insertPlaylist(converted)
+        Log.d("inserted to restored tracks", "successfully")
+        db.playlistDao().restoreTrack()
+        Log.d("restoring tracks", "successfully")
+        db.playlistDao().clearRestoredTracks(playlist.playlistId)
+        Log.d("clearing restored tracks", "successfully")
     }
 
     override fun deletePlaylist(playlist: Playlist) {
-        convertor.map(playlist).let { db.playlistDao().deletePlaylist(playlist.playlistId) }
+        db.playlistDao().deletePlaylist(playlist.playlistId)
+        Log.d("Playlist ${playlist.playlistId}", "was deleted")
+        db.playlistDao().decreaseAllQuantity(playlist.playlistId)
     }
 
     override fun checkPlaylist(id: Long): Flow<Boolean> = flow {
@@ -46,7 +62,8 @@ class PlaylistsRepositoryImpl(
     }
 
     override fun getTracks(id: Long): Flow<List<Track>> = flow {
-        db.playlistDao().getTracksFromPlaylist(id)
+        val tracks = db.playlistDao().getTracksFromPlaylist(id)
+        emit(convertFromTrackEntity(tracks.reversed()))
     }
 
     override fun putTrack(tracks: TracksInPlaylistEntity) {
@@ -87,9 +104,25 @@ class PlaylistsRepositoryImpl(
         return playlists.map { playlists -> convertor.map(playlists) }
     }
 
+    private fun convertFromTrackEntity(tracks: List<TrackInsidePlaylistEntity>): List<Track> {
+        return tracks.map { track -> convertorForTrack.map(track) }
+    }
+
     override fun checkIfAlreadyInPlaylist(track: Track, playlist: Playlist): Boolean {
         val e = db.playlistDao().checkIfTrackIsInPlaylist(playlist.playlistId, track.trackId)
         return e
+    }
+
+    override fun getData(id: Long): Playlist {
+        val playlist = db.playlistDao().queryPlaylistId(id)
+        val list = listOf(playlist)
+        val pl = convertFromPlaylistEntity(list)
+        return pl.first()
+    }
+
+    override fun deleteTrack(track: Track, playlist: Playlist) {
+        db.playlistDao().deleteTrack(track.trackId, playlist.playlistId)
+        db.playlistDao().decreaseQuantity(playlist.playlistId)
     }
 
 

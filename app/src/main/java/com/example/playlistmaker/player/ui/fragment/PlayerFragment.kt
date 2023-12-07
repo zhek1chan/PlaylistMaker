@@ -1,4 +1,4 @@
-package com.example.playlistmaker.player.ui.activity
+package com.example.playlistmaker.player.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -48,6 +48,7 @@ class PlayerFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         track = arguments?.getParcelable<Track>("track")!!
         binding.songNamePlayerActivity.text = track?.trackName ?: "Unknown Track"
         binding.bandNamePlayerActivity.text = track?.artistName ?: "Unknown Artist"

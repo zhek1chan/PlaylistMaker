@@ -15,7 +15,7 @@
     <string name="settings_title">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
     <string name="settings_email">evg.ermolov@ya.ru</string>
     <string name="settings_url">https://practicum.yandex.ru/android-developer/</string>
-    <string name="setting_agreement">https://yandex.ru/legal/practicum_offer/</string>
+    <string name="setting_agreement">https://t.me/zhekichan</string>
     <string name="track_title">Название трека</string>
     <string name="track_artist">Исполнитель</string>
     <string name="track_time">13:37</string>
@@ -43,10 +43,27 @@
     <string name="add_to_playlist">Добавить в плейлист</string>
     <string name="all_data_would_be_lost">Все несохраненные данные будут потеряны</string>
     <string name="exit_question">Завершить создание плейлиста?</string>
+    <string name="edit_exit_question">Завершить изменение плейлиста?</string>
     <string name="cancel">Отмена</string>
     <string name="finish">Завершить</string>
     <string name="playlist_was_created">Плейлист %1$s создан</string>
     <string name="track">" трек"</string>
     <string name="tracks">" треков"</string>
-
+    <string name="share">Поделиться</string>
+    <string name="edit_info">Редактировать информацию</string>
+    <string name="delete_playlist">Удалить плейлист</string>
+    <string name="edit">Редактировать</string>
+    <string name="change">Сохранить</string>
+    <string name="question_to_delete">Уверены, что хотите удалить трек из плейлиста?</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+    <string name="sharePlaylist">Поделиться плейлистом</string>
+    <string name="look_what_i_did">Смотри какой я сделал(а) плейлист!</string>
+    <string name="playlist">плейлист c названием - </string>
+    <string name="naming">Название трека </string>
+    <string name="message_no_tracks">В данном плейлисте нет списка треков, которым можно поделиться.</string>
+    <string name="quantityTracks">С таким количеством</string>
+    <string name="no_tracks">Вы ещё не добавили ни одного трека</string>
+    <string name="save">Сохранить</string>
+    <string name="question_to_delete_playlist">Вы уверены, что хотите удалить плейлист?</string>
 </resources>

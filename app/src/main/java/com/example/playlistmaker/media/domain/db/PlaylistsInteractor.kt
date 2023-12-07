@@ -6,7 +6,7 @@ import com.example.playlistmaker.player.domain.Track
 import kotlinx.coroutines.flow.Flow
 
 interface PlaylistsInteractor {
-    fun playlistAdd(playlist: Playlist)
+    fun playlistAdd(playlist: Playlist, tracks: List<Track>)
     fun playlistDelete(playlist: Playlist)
     suspend fun playlistGet(): Flow<List<Playlist>>
     suspend fun playlistCheck(id: Long): Flow<Boolean>
@@ -15,4 +15,6 @@ interface PlaylistsInteractor {
     fun insertTrack(track: Track)
     fun savePic(uri: Uri)
     fun checkIfAlreadyInPlaylist(track: Track, playlist: Playlist): Boolean
+    fun getPlaylistData(id: Long): Playlist
+    fun deleteTrack(track: Track, playlist: Playlist)
 }

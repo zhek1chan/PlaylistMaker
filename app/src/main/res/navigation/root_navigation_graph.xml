@@ -11,7 +11,7 @@
         android:label="SearchFragment">
         <action
             android:id="@+id/Fragment_to_playerFragment"
-            app:destination="@id/playerActivity"></action>
+            app:destination="@id/playerActivity" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -23,15 +23,54 @@
         android:label="MediaFragment">
         <action
             android:id="@+id/Fragment_fav_to_playerFragment"
-            app:destination="@id/playerActivity"></action>
+            app:destination="@id/playerActivity" />
+        <action
+            android:id="@+id/action_mediaFragment_to_playlistsFragment"
+            app:destination="@id/playlistsFragment" />
     </fragment>
     <fragment
         android:id="@+id/createPlaylistFragment"
-        android:name="com.example.playlistmaker.media.ui.fragments.CreatingPlaylistFragment"
+        android:name="com.example.playlistmaker.media.ui.fragments.playlists.CreatingPlaylistFragment"
         android:label="CreatingPlaylistFragment" />
     <fragment
         android:id="@+id/playerActivity"
-        android:name="com.example.playlistmaker.player.ui.activity.PlayerFragment"
+        android:name="com.example.playlistmaker.player.ui.fragment.PlayerFragment"
         android:label="fragment_player"
-        tools:layout="@layout/fragment_player" />
+        tools:layout="@layout/fragment_player">
+        <action
+            android:id="@+id/action_playerActivity_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
+        <action
+            android:id="@+id/action_playerActivity_to_mediaFragment"
+            app:destination="@id/mediaFragment" />
+        <action
+            android:id="@+id/action_playerActivity_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="com.example.playlistmaker.media.ui.fragments.playlists.PlaylistFragment"
+        android:label="PlaylistFragment">
+        <action
+            android:id="@+id/fragment_to_playerFragment"
+            app:destination="@id/playerActivity" />
+        <action
+            android:id="@+id/fragment_to_playlistsFragment"
+            app:destination="@id/playlistsFragment"
+            app:popUpToSaveState="true"></action>
+        <action
+            android:id="@+id/action_playlistFragment_to_createPlaylistFragment"
+            app:destination="@id/createPlaylistFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistsFragment"
+        android:name="com.example.playlistmaker.media.ui.fragments.playlists.PlaylistsFragment"
+        android:label="PlaylistsFragment">
+        <action
+            android:id="@+id/action_playlistsFragment_to_createPlaylistFragment"
+            app:destination="@id/createPlaylistFragment" />
+        <action
+            android:id="@+id/action_playlistsFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
+    </fragment>
 </navigation>

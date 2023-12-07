@@ -21,11 +21,11 @@ class TrackInPlaylistConvertor {
     }
     fun map(track: Track): TrackInsidePlaylistEntity {
         return TrackInsidePlaylistEntity(
-            track.trackId,
+            track.trackName,
             track.artistName,
             track.trackTimeMillis,
             track.artworkUrl100,
-            track.trackName,
+            track.trackId,
             track.collectionName,
             track.releaseDate,
             track.primaryGenreName,

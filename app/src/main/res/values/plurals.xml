@@ -7,4 +7,19 @@
         <item quantity="other">треков</item>
         <item quantity="many">треков</item>
     </plurals>
+    <plurals name="numberOfTracksAvailable">
+        <item quantity="one">трек</item>
+        <item quantity="few">трека</item>
+        <item quantity="zero">треков</item>
+        <item quantity="two">трека</item>
+        <item quantity="other">треков</item>
+        <item quantity="many">треков</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">минута</item>
+        <item quantity="few">минут</item>
+        <item quantity="zero">минут</item>
+        <item quantity="other">минут</item>
+        <item quantity="many">минут</item>
+    </plurals>
 </resources>

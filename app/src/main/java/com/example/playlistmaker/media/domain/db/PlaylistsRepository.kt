@@ -8,8 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface PlaylistsRepository {
     fun getPlaylists(): Flow<List<Playlist>>
 
-    fun putPlaylist(playlist: Playlist)
-
     fun deletePlaylist(playlist: Playlist)
 
     fun checkPlaylist(id: Long): Flow<Boolean>
@@ -22,4 +20,7 @@ interface PlaylistsRepository {
 
     fun savePic(uri: Uri)
     fun checkIfAlreadyInPlaylist(track: Track, playlist: Playlist): Boolean
+    fun getData(id: Long): Playlist
+    fun deleteTrack(track: Track, playlist: Playlist)
+    fun putPlaylist(playlist: Playlist, tracks: List<Track>)
 }

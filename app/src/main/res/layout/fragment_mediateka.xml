@@ -23,6 +23,7 @@
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
+        android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="@dimen/common_padding"
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"

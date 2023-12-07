@@ -19,19 +19,32 @@ interface PlaylistDao {
     fun getPlaylist(): List<PlaylistEntity>
 
     @Query("SELECT PlaylistId FROM playlists_table")
-    fun getPlaylistId(): Flow<List<Integer>>
+    fun getPlaylistId(): Flow<List<Int>>
 
-    @Query("DELETE FROM playlists_table WHERE :playlistsId = PlaylistId")
-    fun deletePlaylist(playlistsId: Long): Integer
+    @Query("DELETE FROM TracksInPlaylist WHERE playlistId = :playlistsId AND trackId = :trackId")
+    fun deleteTrack(trackId: Long, playlistsId: Long)
+
+    @Query("DELETE FROM playlists_table WHERE PlaylistId = :playlistsId")
+    fun deletePlaylist(playlistsId: Long)
+
+    @Query("DELETE FROM TracksInPlaylist WHERE PlaylistId = :playlistId")
+    fun deleteTracksInPlaylist(playlistId: Long)
+
 
     @Query("SELECT * FROM playlists_table WHERE :searchId = PlaylistId")
-    fun queryPlaylistId(searchId: Long): PlaylistEntity?
+    fun queryPlaylistId(searchId: Long): PlaylistEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addingTrack(tracksInPlaylist: TracksInPlaylistEntity)
 
     @Insert(entity = TrackInsidePlaylistEntity::class, onConflict = OnConflictStrategy.IGNORE)
     fun insertTrack(track: TrackInsidePlaylistEntity)
+
+    @Query("UPDATE playlists_table SET num = num - num WHERE playlistId = :playlistId")
+    fun decreaseAllQuantity(playlistId: Long): Int?
+
+    @Query("UPDATE playlists_table SET num = num - 1 WHERE playlistId = :playlistId")
+    fun decreaseQuantity(playlistId: Long): Int?
 
     @Query("UPDATE playlists_table SET num = num + 1 WHERE playlistId = :playlistId")
     fun updateQuantity(playlistId: Long): Int?
@@ -45,11 +58,14 @@ interface PlaylistDao {
         WHERE TracksInPlaylist.playlistId = :playlistId;
         """
     )
-    fun getTracksFromPlaylist(playlistId: Long): Flow<List<TrackInsidePlaylistEntity>>
+    fun getTracksFromPlaylist(playlistId: Long): List<TrackInsidePlaylistEntity>
 
 
     @Query("SELECT EXISTS (SELECT * FROM TracksInPlaylist WHERE playlistId = :playlistId AND trackId = :trackId)")
     fun checkIfTrackIsInPlaylist(playlistId: Long, trackId: Long): Boolean
+
+    @Query("SELECT * FROM playlists_table WHERE playlistId=:id")
+    fun getdata(id: Long): PlaylistEntity
 
     @Transaction
     fun addTrackToPlaylist(tInP: TracksInPlaylistEntity): Boolean {
@@ -62,4 +78,14 @@ interface PlaylistDao {
             false
         }
     }
+
+
+    @Query("INSERT INTO restored_tracks_in_playlist (playlistId, TrackId) VALUES (:pl, :tr)")
+    fun insertRestoredTrack(pl: Long, tr: Long)
+
+    @Query("INSERT INTO TracksInPlaylist SELECT * FROM restored_tracks_in_playlist")
+    fun restoreTrack()
+
+    @Query("DELETE FROM restored_tracks_in_playlist WHERE playlistId = :playlistId")
+    fun clearRestoredTracks(playlistId: Long)
 }

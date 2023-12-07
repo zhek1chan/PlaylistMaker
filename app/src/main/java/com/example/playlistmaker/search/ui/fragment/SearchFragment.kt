@@ -64,17 +64,21 @@ class SearchFragment : Fragment() {
             }
         }
 
-        trackAdapter = TrackAdapter {
-            if (isClickAllowed) {
-                clickAdapting(it)
-            }
-        }
+        trackAdapter = TrackAdapter(
+            clickListener = {
+                if (isClickAllowed) {
+                    clickAdapting(it)
+                }
+            },
+            longClickListener = {})
 
-        historyAdapter = TrackAdapter {
-            if (isClickAllowed) {
-                clickAdapting(it)
-            }
-        }
+        historyAdapter = TrackAdapter(
+            clickListener = {
+                if (isClickAllowed) {
+                    clickAdapting(it)
+                }
+            },
+            longClickListener = {})
         isClickAllowed = false
         clickDebounceManager()
         onEditorFocus()
@@ -138,6 +142,7 @@ class SearchFragment : Fragment() {
         searchViewModel.addItem(item)
         val bundle = Bundle()
         bundle.putParcelable("track", item)
+        Log.d("track", "$item")
         val navController = findNavController()
         navController.navigate(R.id.Fragment_to_playerFragment, bundle)
     }

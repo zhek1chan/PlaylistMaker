@@ -1,4 +1,4 @@
-package com.example.playlistmaker.media.ui.fragments
+package com.example.playlistmaker.media.ui.fragments.playlists
 
 import android.os.Bundle
 import android.util.Log
@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.FragmentPlaylistsBinding
+import com.example.playlistmaker.media.data.PlaylistsState
 import com.example.playlistmaker.media.domain.db.Playlist
 import com.example.playlistmaker.media.ui.PlaylistsAdapter
-import com.example.playlistmaker.media.data.PlaylistsState
-import com.example.playlistmaker.media.ui.viewmodel.PlaylistsViewModel
+import com.example.playlistmaker.media.ui.viewmodel.playlists.PlaylistsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlaylistsFragment : Fragment() {
     private val viewModel by viewModel<PlaylistsViewModel>()
     private lateinit var binding: FragmentPlaylistsBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var plAdapter: PlaylistsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,9 +35,12 @@ class PlaylistsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.newPlaylist.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("playlist", Playlist(0, "", "", "", 0, 0))
             Log.d("NewPlaylist", "tap tap")
-            findNavController().navigate(R.id.createPlaylistFragment)
+            findNavController().navigate(R.id.createPlaylistFragment, bundle)
         }
+
 
         viewModel.fillData()
         recyclerView = binding.recyclerView
@@ -65,8 +69,18 @@ class PlaylistsFragment : Fragment() {
         binding.emptyLibrary.visibility = View.GONE
         binding.placeholderMessage.visibility = View.GONE
         binding.recyclerView.visibility = View.VISIBLE
-        recyclerView.adapter = PlaylistsAdapter(playlist)
+        recyclerView.adapter = PlaylistsAdapter(playlist) {
+            clickAdapting(it)
+        }
         recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    private fun clickAdapting(item: Playlist) {
+        Log.d("PlaylistFragment", "Click on the playlist")
+        val bundle = Bundle()
+        bundle.putParcelable("playlist", item)
+        val navController = findNavController()
+        navController.navigate(R.id.playlistFragment, bundle)
     }
 
     private fun showEmpty() {

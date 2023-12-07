@@ -38,12 +38,10 @@ class FavouriteTracksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = TrackAdapter(
-            object : TrackAdapter.TrackClick {
-                override fun onClick(track: Track) {
-                    onTrackClickDebounce(track)
-                }
-            }
-        )
+            clickListener = {
+                onTrackClickDebounce(it)
+            },
+            longClickListener = {})
 
         placeholderMessage = binding.placeholderMessage
         placeholderPicture = binding.emptyLibrary
